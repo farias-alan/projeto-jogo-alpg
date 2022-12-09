@@ -36,3 +36,20 @@ while rodando:
     screem.blit(personagem, (posicao_personagem_x, posicao_personagem_y))
 
     pygame.display.update()
+
+'''
+código para movimentação do personagem:
+
+velocidade = 10
+
+   comandos = pygame.key.get_pressed()
+    if comandos[pygame.K_UP]:
+        y -= velocidade
+    if comandos[pygame.K_DOWN]:
+        y += velocidade
+    if comandos[pygame.K_RIGHT]:
+        y += velocidade
+    if comandos[pygame.K_LEFT]:
+        x -= velocidade
+        
+'''
