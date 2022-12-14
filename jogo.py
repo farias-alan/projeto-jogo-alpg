@@ -8,10 +8,15 @@ y = 720
 velocidade = 1
 velocidade_barreiras = 1
 
+#Efeito sonoro
+pygame.mixer.music.load('efeitos.sonoros/battleThemeA.wav')
+pygame.mixer.music.play(-1)
+
+
 tela = pygame.display.set_mode((x, y))
 pygame.display.set_caption("jogo de tiro")
 
-bg = pygame.image.load("imagemcidade.png")
+bg = pygame.image.load('cidade.jpg')
 bg = pygame.transform.scale(bg, (x, y))
 rodando = True
 
