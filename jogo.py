@@ -7,12 +7,13 @@ x = 1280
 y = 720
 velocidade = 1
 velocidade_barreiras = 1
+velocidade_bandidos = 1
 
 #Efeito sonoro
 pygame.mixer.music.load('efeitos.sonoros/battleThemeA.wav')
 pygame.mixer.music.play(-1)
 
-
+#tela e cenario
 tela = pygame.display.set_mode((x, y))
 pygame.display.set_caption("jogo de tiro")
 
@@ -30,10 +31,22 @@ posicao_carro_y = 515
 # Obstáculos
 
 barreira = pygame.image.load('barreiras/barreira_00.png')
-barreira = pygame.transform.scale(barreira, (70, 70))
+barreira = pygame.transform.scale(barreira,(70,70))
+
+bandido = pygame.image.load('imagemladrao.png')
+bandido = pygame.transform.scale(bandido,(50,50))
+
+bandido2 = pygame.image.load('imagembandido2.png')
+bandido2 = pygame.transform.scale(bandido2,(50,50))
 
 posicao_barreira_x = 1000
 posicao_barreira_y = 595
+
+posicao_bandido_x = 1000
+posicao_bandido_y = 595
+
+posicao_bandido2_x = 1500
+posicao_bandido2_y = 660
 
 barreira2 = pygame.image.load('barreiras/barreira_01.png')
 barreira2 = pygame.transform.scale(barreira2, (70, 70))
@@ -45,9 +58,9 @@ while rodando:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             rodando = False
-
+    #loop da tela
     tela.blit(bg, (0, 0))
-
+    
     rel_x = x % bg.get_rect().width
     tela.blit(bg, (rel_x - bg.get_rect().width, 0))
     if rel_x < 1280:
@@ -69,6 +82,13 @@ while rodando:
     if (posicao_barreira2_x <= -100):
         posicao_barreira2_x = random.randint(1470, 1700)
 
+    posicao_bandido_x -= velocidade_bandidos
+    if posicao_bandido_x <= -100:
+        posicao_bandido_x = random.randint(1200, 1450)
+
+    posicao_bandido2_x -= velocidade_bandidos
+    if posicao_bandido2_x <= -100:
+        posicao_bandido2_x = random.randint(1470, 1700)
     # Velocidade Tela
     x -= 1
 
@@ -76,5 +96,7 @@ while rodando:
     tela.blit(carro, (posicao_carro_x, posicao_carro_y))
     tela.blit(barreira, (posicao_barreira_x, posicao_barreira_y))
     tela.blit(barreira2, (posicao_barreira2_x, posicao_barreira2_y))
-
-    pygame.display.update()
+    tela.blit(bandido(posicao_bandido_x, posicao_bandido_y))
+    tela.blit(bandido2(posicao_bandido2_x, posicao_bandido2_y))
+    
+    pygame.display.update
