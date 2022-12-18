@@ -13,7 +13,7 @@ pontos = 0  # Teste
 # Efeito sonoro
 musicadefundo = pygame.mixer.music.load('efeitos.sonoros/musica_de_fundo.wav')
 pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.05)
+pygame.mixer.music.set_volume(0.2)
 
 som_tiro = pygame.mixer.Sound('efeitos.sonoros/som_bala.wav')
 
@@ -65,17 +65,26 @@ triggered = False
 
 barreira = pygame.image.load('barreiras/barreira_00.png').convert_alpha()
 barreira = pygame.transform.scale(barreira, (70, 70))
-barreira_colisao = barreira.get_rect()
+barreira_col_01 = barreira.get_rect()
+barreira_col_02 = barreira.get_rect()
+
 
 posicao_barreira_x = 1000
 posicao_barreira_y = 595
 
-barreira2 = pygame.image.load('barreiras/barreira_01.png').convert_alpha()
-barreira2 = pygame.transform.scale(barreira2, (70, 70))
-barreira2_colisao = barreira2.get_rect()
+pos_barreira_x = 1800
+pos_barreira_y = 595
 
-posicao_barreira2_x = 1500
-posicao_barreira2_y = 660
+barricada = pygame.image.load('barreiras/barreira_01.png').convert_alpha()
+barricada = pygame.transform.scale(barricada, (70, 70))
+barricada_col_01 = barricada.get_rect()
+barricada_col_02 = barricada.get_rect()
+
+posicao_barricada_x = 1300
+posicao_barricada_y = 660
+
+pos_barricada_x = 2100
+pos_barricada_y = 660
 
 bandido = pygame.image.load('inimigos/inimigo1.png').convert_alpha()
 bandido = pygame.transform.scale(bandido, (50, 50))
@@ -123,44 +132,69 @@ while rodando:
     pos_x_bala += veloc_bala
 
     # Obstáculos
-    posicao_barreira_x -= velocidade_barreiras
-    if (posicao_barreira_x <= -100):
-        posicao_barreira_x = random.randint(1200, 1450)
+    posicao_barreira_x -= velocidade
+    if posicao_barreira_x <= -50:
+        posicao_barreira_x = 1400
 
-    posicao_barreira2_x -= velocidade_barreiras
-    if (posicao_barreira2_x <= -100):
-        posicao_barreira2_x = random.randint(1470, 1700)
+    pos_barreira_x -= velocidade
+    if pos_barreira_x <= -50:
+        pos_barreira_x = 1400
 
-    posicao_bandido_x -= velocidade_bandidos
+    posicao_barricada_x -= velocidade
+    if posicao_barricada_x <= -50:
+        posicao_barricada_x = 1400
+
+    pos_barricada_x -= velocidade
+    if pos_barricada_x <= -50:
+        pos_barricada_x = 1400
+
+    posicao_bandido_x -= velocidade
     if posicao_bandido_x <= -100:
         posicao_bandido_x = random.randint(1200, 1450)
 
-    posicao_bandido2_x -= velocidade_bandidos
+    posicao_bandido2_x -= velocidade
     if posicao_bandido2_x <= -100:
         posicao_bandido2_x = random.randint(1470, 1700)
 
     # Colisão
-    if carro_colisao.colliderect(barreira_colisao):
+    if carro_colisao.colliderect(barreira_col_01):
         pontos += 1  # Teste. Aqui será o game over
         print(pontos)
 
-    if carro_colisao.colliderect(barreira2_colisao):
+    if carro_colisao.colliderect(barreira_col_02):
         pontos += 1  # Teste. Aqui será o game over
+        print(pontos)
+
+    if carro_colisao.colliderect(barricada_col_01):
+        pontos += 1  # Teste. Aqui será o game over
+        print(pontos)
+
+    if carro_colisao.colliderect(barricada_col_02):
+        pontos += 1
         print(pontos)
 
     pygame.draw.rect(tela, (255, 0, 0), carro_colisao, -1)
-    pygame.draw.rect(tela, (255, 0, 0), barreira_colisao, -1)
-    pygame.draw.rect(tela, (255, 0, 0), barreira2_colisao, -1)
+
+    pygame.draw.rect(tela, (255, 0, 0), barreira_col_01, -1)
+    pygame.draw.rect(tela, (255, 0, 0), barreira_col_02, -1)
+
+    pygame.draw.rect(tela, (255, 0, 0), barricada_col_01, -1)
+    pygame.draw.rect(tela, (255, 0, 0), barricada_col_02, -1)
+
     pygame.Rect.update(carro_colisao, posicao_carro_x + 10,
                        posicao_carro_y + 80, 135, 50)
-    pygame.Rect.update(barreira_colisao, posicao_barreira_x,
+    pygame.Rect.update(barreira_col_01, posicao_barreira_x,
                        posicao_barreira_y, 65, 60)
+    pygame.Rect.update(barreira_col_02, pos_barreira_x, pos_barreira_y, 65, 65)
 
-    barreira_colisao.y = posicao_barreira_y
-    barreira_colisao.x = posicao_barreira_x
+    barreira_col_01.y = posicao_barreira_y
+    barreira_col_01.x = posicao_barreira_x
 
-    barreira2_colisao.y = posicao_barreira2_y
-    barreira2_colisao.x = posicao_barreira2_x
+    barricada_col_01.y = posicao_barricada_y
+    barricada_col_01.x = posicao_barricada_x
+
+    barricada_col_02.y = pos_barricada_y
+    barricada_col_02.x = pos_barricada_x
 
     # Velocidade Tela
     x -= 1
@@ -171,10 +205,16 @@ while rodando:
 
     # Imagem
     tela.blit(bala, (pos_x_bala, pos_y_bala))
+
     tela.blit(barreira, (posicao_barreira_x, posicao_barreira_y))
-    tela.blit(barreira2, (posicao_barreira2_x, posicao_barreira2_y))
+    tela.blit(barreira, (pos_barreira_x, pos_barreira_y))
+
+    tela.blit(barricada, (posicao_barricada_x, posicao_barricada_y))
+    tela.blit(barricada, (pos_barricada_x, pos_barricada_y))
+
     tela.blit(bandido, (posicao_bandido_x, posicao_bandido_y))
     tela.blit(bandido2, (posicao_bandido2_x, posicao_bandido2_y))
+
     tela.blit(carro, (posicao_carro_x, posicao_carro_y))
 
     pygame.display.update()
