@@ -8,7 +8,14 @@ y = 720
 velocidade = 1
 velocidade_barreiras = 1
 velocidade_bandidos = 1
-pontos = 0  # Teste
+
+
+# Código da pontuação
+pontos = 0  
+font = pygame.font.Font('freesansbold.ttf', 25)
+text = font.render("PONTUAÇÃO: " + str(pontos), True, (0, 0, 0))
+textRect = text.get_rect()
+textRect.center = (640, 20)
 
 # Efeito sonoro
 musicadefundo = pygame.mixer.music.load('efeitos.sonoros/musica_de_fundo.wav')
@@ -216,5 +223,7 @@ while rodando:
     tela.blit(bandido2, (posicao_bandido2_x, posicao_bandido2_y))
 
     tela.blit(carro, (posicao_carro_x, posicao_carro_y))
+
+    tela.blit(text, textRect)
 
     pygame.display.update()
