@@ -17,7 +17,7 @@ textRect.center = (640, 20)
 # Efeito sonoro
 musicadefundo = pygame.mixer.music.load('efeitos.sonoros/musica_de_fundo.wav')
 pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.set_volume(0.05)
 
 som_tiro = pygame.mixer.Sound('efeitos.sonoros/som_bala.wav')
 
@@ -180,11 +180,11 @@ while rodando:
 
     # Colisão Bala com bandido
     if bala_col.colliderect(bandido_01_col):
-        pontos += 1
-        print(pontos)
+        pontos = pontos + 1
+        text = font.render("PONTUAÇÃO: " + str(pontos), True, (0, 0, 0))
     if bala_col.colliderect(bandido_02_col):
-        pontos += 1
-        print(pontos)
+        pontos = pontos + 1
+        text = font.render("PONTUAÇÃO: " + str(pontos), True, (0, 0, 0))
 
     # Caixa de colisão
 
