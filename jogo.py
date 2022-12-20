@@ -8,7 +8,7 @@ y = 720
 velocidade = 1
 
 # Código da pontuação
-pontos = 0
+pontos = -2
 font = pygame.font.Font('freesansbold.ttf', 25)
 text = font.render("PONTUAÇÃO: " + str(pontos), True, (0, 0, 0))
 textRect = text.get_rect()
@@ -162,21 +162,17 @@ while rodando:
         pos_bandido_02_x = random.randint(1470, 1700)
 
     # Colisão Carro com barreira/barricada
-    '''if carro_colisao.colliderect(barreira_col_01):
-        pontos += 1  # Teste. Aqui será o game over
-        print(pontos)
+    if carro_colisao.colliderect(barreira_col_01) and posicao_barreira_x <= 100:
+        pontos += 0
 
-    if carro_colisao.colliderect(barreira_col_02):
-        pontos += 1  # Teste. Aqui será o game over
-        print(pontos)
+    if carro_colisao.colliderect(barreira_col_02) and pos_barreira_x <= 100:
+        pontos += 0
 
-    if carro_colisao.colliderect(barricada_col_01):
-        pontos += 1  # Teste. Aqui será o game over
-        print(pontos)
+    if carro_colisao.colliderect(barricada_col_01) and posicao_barricada_x <= 100:
+        pontos += 0
 
-    if carro_colisao.colliderect(barricada_col_02):
-        pontos += 1
-        print(pontos)'''
+    if carro_colisao.colliderect(barricada_col_02) and pos_barricada_x <= 100:
+        pontos += 0
 
     # Colisão Bala com bandido
     if bala_col.colliderect(bandido_01_col):
@@ -208,15 +204,15 @@ while rodando:
 
     # Ajustes de tamanho e posição da caixa
     pygame.Rect.update(carro_colisao, posicao_carro_x + 10,
-                       posicao_carro_y + 80, 135, 50)
+                       posicao_carro_y + 85, 135, 45)
     pygame.Rect.update(barreira_col_01, posicao_barreira_x,
                        posicao_barreira_y, 65, 60)
     pygame.Rect.update(barreira_col_02, pos_barreira_x, pos_barreira_y, 65, 65)
     pygame.Rect.update(bandido_01_col, pos_bandido_01_x,
-                       pos_bandido_01_y, 2, 65)
+                       pos_bandido_01_y, 2, 50)
     pygame.Rect.update(bandido_02_col, pos_bandido_02_x,
                        pos_bandido_01_y, 2, 65)
-    pygame.Rect.update(bala_col, pos_x_bala + 35, pos_y_bala + 15, 2, 40)
+    pygame.Rect.update(bala_col, pos_x_bala + 35, pos_y_bala + 15, 2, 30)
 
     barreira_col_01.y = posicao_barreira_y
     barreira_col_01.x = posicao_barreira_x
