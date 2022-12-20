@@ -93,14 +93,14 @@ bandido_01 = pygame.image.load('inimigos/inimigo1.png').convert_alpha()
 bandido_01 = pygame.transform.scale(bandido_01, (60, 60))
 bandido_01_col = bandido_01.get_rect()
 
-pos_bandido_01_x = 1000
+pos_bandido_01_x = 1300
 pos_bandido_01_y = 580
 
 bandido_02 = pygame.image.load('inimigos/inimigo2.png').convert_alpha()
 bandido_02 = pygame.transform.scale(bandido_02, (60, 60))
 bandido_02_col = bandido_02.get_rect()
 
-pos_bandido_02_x = 1500
+pos_bandido_02_x = 2300
 pos_bandido_02_y = 650
 
 
@@ -136,7 +136,7 @@ while rodando:
 
     pos_x_bala += veloc_bala
 
-    # Obstáculos
+    # Respawn Obstáculos
     posicao_barreira_x -= velocidade
     if posicao_barreira_x <= -50:
         posicao_barreira_x = 1400
@@ -155,11 +155,14 @@ while rodando:
 
     pos_bandido_01_x -= velocidade
     if pos_bandido_01_x <= -100:
-        pos_bandido_01_x = random.randint(1200, 1450)
+        pos_bandido_01_x = 2200
 
     pos_bandido_02_x -= velocidade
     if pos_bandido_02_x <= -100:
-        pos_bandido_02_x = random.randint(1470, 1700)
+        pos_bandido_02_x = 2500
+
+    if pos_bandido_01_x == pos_barreira_x:
+        pos_bandido_01_x = pos_bandido_01_x + 100
 
     # Colisão Carro com barreira/barricada
     if carro_colisao.colliderect(barreira_col_01) and posicao_barreira_x <= 100:
@@ -205,13 +208,16 @@ while rodando:
     # Ajustes de tamanho e posição da caixa
     pygame.Rect.update(carro_colisao, posicao_carro_x + 10,
                        posicao_carro_y + 85, 135, 45)
+
     pygame.Rect.update(barreira_col_01, posicao_barreira_x,
                        posicao_barreira_y, 65, 60)
     pygame.Rect.update(barreira_col_02, pos_barreira_x, pos_barreira_y, 65, 65)
+
     pygame.Rect.update(bandido_01_col, pos_bandido_01_x,
                        pos_bandido_01_y, 2, 50)
     pygame.Rect.update(bandido_02_col, pos_bandido_02_x,
                        pos_bandido_01_y, 2, 65)
+
     pygame.Rect.update(bala_col, pos_x_bala + 35, pos_y_bala + 15, 2, 30)
 
     barreira_col_01.y = posicao_barreira_y
