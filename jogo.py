@@ -21,6 +21,8 @@ pygame.mixer.music.set_volume(0.05)
 
 som_tiro = pygame.mixer.Sound('efeitos.sonoros/som_bala.wav')
 
+som_grito = pygame.mixer.Sound('efeitos.sonoros/som_grito.wav')
+
 # tela e cenario
 tela = pygame.display.set_mode((x, y))
 pygame.display.set_caption("jogo de tiro")
@@ -29,8 +31,9 @@ bg = pygame.image.load('cenario/cidade.jpg')
 bg = pygame.transform.scale(bg, (x, y))
 rodando = True
 
-
 # Função para retorno da bala
+
+
 def retorno():
     x = 1350
     y = random.randint(1, 640)
@@ -84,10 +87,10 @@ barricada_col_01 = barricada.get_rect()
 barricada_col_02 = barricada.get_rect()
 
 posicao_barricada_x = 1300
-posicao_barricada_y = 660
+posicao_barricada_y = 670
 
 pos_barricada_x = 2100
-pos_barricada_y = 660
+pos_barricada_y = 670
 
 bandido_01 = pygame.image.load('inimigos/inimigo1.png').convert_alpha()
 bandido_01 = pygame.transform.scale(bandido_01, (60, 60))
@@ -166,28 +169,29 @@ while rodando:
 
     # Colisão Carro com barreira/barricada
     if carro_colisao.colliderect(barreira_col_01) and posicao_barreira_x <= 100:
-        pontos += 0
         rodando = False
 
     if carro_colisao.colliderect(barreira_col_02) and pos_barreira_x <= 100:
-        pontos += 0
-        rodando =False
-        
+        rodando = False
+
     if carro_colisao.colliderect(barricada_col_01) and posicao_barricada_x <= 100:
-        pontos += 0
-        rodando =False
+        rodando = False
 
     if carro_colisao.colliderect(barricada_col_02) and pos_barricada_x <= 100:
-        pontos += 0
-        rodando =False
+        rodando = False
 
     # Colisão Bala com bandido
     if bala_col.colliderect(bandido_01_col):
         pontos = pontos + 1
         text = font.render("PONTUAÇÃO: " + str(pontos), True, (0, 0, 0))
+        pos_bandido_01_x = 2200
+        pos_bandido_01_y = 580
+
     if bala_col.colliderect(bandido_02_col):
         pontos = pontos + 1
         text = font.render("PONTUAÇÃO: " + str(pontos), True, (0, 0, 0))
+        pos_bandido_02_x = 2500
+        pos_bandido_02_y = 650
 
     # Caixa de colisão
 
