@@ -193,10 +193,17 @@ while rodando:
         pos_bandido_02_x = 2500
         pos_bandido_02_y = 650
 
+    # Colisão Carro com bandido
+    if carro_colisao.colliderect(bandido_01_col) and pos_bandido_01_x <= 200:
+        rodando = False
+
+    if carro_colisao.colliderect(bandido_02_col) and pos_bandido_02_x <= 200:
+        rodando = False
+
     # Caixa de colisão
 
     # Carro
-    pygame.draw.rect(tela, (255, 0, 0), carro_colisao, -1)
+    pygame.draw.rect(tela, (255, 0, 0), carro_colisao, 1)
 
     # Barreira
     pygame.draw.rect(tela, (255, 0, 0), barreira_col_01, -1)
@@ -210,12 +217,12 @@ while rodando:
     pygame.draw.rect(tela, (0, 0, 255), bala_col, -1)
 
     # Bandido
-    pygame.draw.rect(tela, (0, 0, 255), bandido_01_col, -1)
-    pygame.draw.rect(tela, (0, 0, 255), bandido_02_col, -1)
+    pygame.draw.rect(tela, (0, 0, 255), bandido_01_col, 1)
+    pygame.draw.rect(tela, (0, 0, 255), bandido_02_col, 1)
 
     # Ajustes de tamanho e posição da caixa
     pygame.Rect.update(carro_colisao, posicao_carro_x + 10,
-                       posicao_carro_y + 85, 135, 45)
+                       posicao_carro_y + 85, 120, 45)
 
     pygame.Rect.update(barreira_col_01, posicao_barreira_x,
                        posicao_barreira_y, 65, 60)
