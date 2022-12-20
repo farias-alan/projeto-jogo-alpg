@@ -167,15 +167,19 @@ while rodando:
     # Colisão Carro com barreira/barricada
     if carro_colisao.colliderect(barreira_col_01) and posicao_barreira_x <= 100:
         pontos += 0
+        rodando = False
 
     if carro_colisao.colliderect(barreira_col_02) and pos_barreira_x <= 100:
         pontos += 0
-
+        rodando =False
+        
     if carro_colisao.colliderect(barricada_col_01) and posicao_barricada_x <= 100:
         pontos += 0
+        rodando =False
 
     if carro_colisao.colliderect(barricada_col_02) and pos_barricada_x <= 100:
         pontos += 0
+        rodando =False
 
     # Colisão Bala com bandido
     if bala_col.colliderect(bandido_01_col):
